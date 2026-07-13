@@ -1,0 +1,36 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+    Motion.GoToXY(0, 0);
+    Control.Wait(0.33);
+    Forever
+    {
+        Motion.GlideTo(-89, 23, 0.8);
+        Motion.GlideTo(80, 23, 0.7);
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(ext)
+{
+    Control.Wait(0);
+    Looks.Hide();
+    If (Backdrop.GetNumberName(number) == 66)
+    {
+        Looks.Show();
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

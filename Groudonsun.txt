@@ -1,0 +1,59 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.SetSizeTo(55);
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(diegrou)
+{
+    Stop(other scripts in sprite);
+    song = 41;
+    Looks.SwitchBackdropTo(57);
+    Looks.Hide();
+    Sound.StopAllSounds();
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(grou)
+{
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.SwitchCostumeTo(Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Groudon);
+    Looks.Show();
+    Motion.GoToXY(-240, 180);
+    Control.Wait(2);
+    Forever
+    {
+        Control.CreateCloneOf(_myself_);
+        Control.Wait(0.9);
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Motion.PointTowards(mudkip);
+    Repeat (5)
+    {
+        Motion.Move(10);
+    }
+    Repeat Until (Sensing.TouchingObject(_edge_) And (Motion.XPosition() > -235))
+    {
+        Motion.Move(5);
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+sun.png

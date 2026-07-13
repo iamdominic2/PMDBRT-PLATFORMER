@@ -1,0 +1,103 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.GoToXY(-11, 150);
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(dieray)
+{
+    Stop(other scripts in sprite);
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.Hide();
+    song = 20;
+    Sound.StopAllSounds();
+    Sound.ClearEffects();
+    Looks.SwitchBackdropTo(68);
+}
+
+WhenBroadcastReceived(ray)
+{
+    Looks.Show();
+    Looks.Show();
+    Looks.SwitchCostumeTo(Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Rayquaza);
+    bosshp = 260;
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Motion.PointInDirection(90);
+    Forever
+    {
+        Motion.GlideTo(-11, 150, 1);
+        Control.Wait(1);
+        Repeat (6)
+        {
+            Motion.ChangeYBy(10);
+        }
+        Looks.Hide();
+        Looks.SwitchCostumeTo(costume1);
+        Repeat (4)
+        {
+            Motion.SetX(Operator.Random(-222 , 111));
+            Motion.PointTowards(mudkip);
+            Control.CreateCloneOf(_myself_);
+            Control.CreateCloneOf(_myself_);
+            Repeat (4)
+            {
+                Control.Wait(0);
+            }
+        }
+        Motion.PointInDirection(90);
+        Control.Wait(1);
+        Looks.SwitchCostumeTo(Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Rayquaza);
+        Looks.Show();
+        Motion.SetX(-11);
+        Repeat (6)
+        {
+            Motion.ChangeYBy(-10);
+        }
+        Control.Wait(1);
+        Repeat (Operator.Random(4 , 7))
+        {
+            Motion.GlideTo(motion_glideto_menu ?? - probably legacy function from Scratch 2.0, 0.8);
+        }
+        Repeat (24)
+        {
+            Motion.TurnRight(21);
+            Control.CreateCloneOf(_myself_);
+        }
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.SwitchCostumeTo(costume1);
+    Looks.Show();
+    Motion.ChangeYBy(-24);
+    Repeat Until Sensing.TouchingObject(_edge_)
+    {
+        Motion.Move(7);
+    }
+    If (Operator.Random(1 , 2) == 1)
+    {
+        Control.CreateCloneOf(_myself_);
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Rayquaza.png

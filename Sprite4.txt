@@ -1,0 +1,53 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+    Motion.GoToXY(0, -65);
+    Motion.PointInDirection(90);
+    Control.Wait(0.33);
+    Forever
+    {
+        Repeat (48)
+        {
+            Motion.TurnRight(15);
+        }
+        Control.Wait(0.7);
+        Repeat (234)
+        {
+            Motion.ChangeYBy(0.9166666666666666666667);
+        }
+        Repeat (39)
+        {
+            Motion.ChangeYBy(-5.5);
+        }
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(ext)
+{
+    Control.Wait(0);
+    Looks.Hide();
+    If (Backdrop.GetNumberName(number) == 64)
+    {
+        Looks.Show();
+    }
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+Backdrop.GetNumberName(number);
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

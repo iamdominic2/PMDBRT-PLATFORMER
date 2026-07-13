@@ -1,0 +1,89 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(diemolt)
+{
+    Stop(other scripts in sprite);
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.SwitchBackdropTo(41);
+    Looks.Hide();
+    song = 20;
+    Sound.StopAllSounds();
+}
+
+WhenBroadcastReceived(molt)
+{
+    Motion.GoToXY(-150, 90);
+    bosshp = 109;
+    Repeat (33)
+    {
+        Stop(other scripts in sprite);
+        Control.DeleteThisClone();
+    }
+    Looks.SwitchCostumeTo(48016);
+    Looks.SetSizeTo(300);
+    Looks.Show();
+    Forever
+    {
+        Repeat (10)
+        {
+            Motion.ChangeXBy(12);
+            Motion.ChangeYBy(6);
+        }
+        Control.Wait(0.2);
+        Control.CreateCloneOf(_myself_);
+        Repeat (10)
+        {
+            Motion.ChangeXBy(-12);
+            Motion.ChangeYBy(-6);
+        }
+        Control.Wait(0.2);
+        Control.CreateCloneOf(_myself_);
+        Repeat (10)
+        {
+            Motion.ChangeXBy(12);
+            Motion.ChangeYBy(-6);
+        }
+        Repeat (10)
+        {
+            Motion.ChangeXBy(-12);
+            Motion.ChangeYBy(6);
+        }
+        Control.Wait(0.2);
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.SetSizeTo(100);
+    Looks.SwitchCostumeTo(fire);
+    Motion.PointTowards(mudkip);
+    Repeat (10)
+    {
+        Motion.Move(4);
+    }
+    Repeat Until Sensing.TouchingObject(_edge_)
+    {
+        Motion.Move(9);
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+48016.png
+fire.png

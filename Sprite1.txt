@@ -1,0 +1,51 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+index = 50
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.GoToXY(-240, -175);
+    index = 0;
+    Looks.Show();
+    Looks.SetEffectTo(COLOR, 65);
+    Repeat (50)
+    {
+        Motion.ChangeXBy(9.5);
+        Control.CreateCloneOf(_myself_);
+        index += 1;
+    }
+    Looks.Hide();
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Forever
+    {
+        If (List.ContainsItem(bosslevels, Backdrop.GetNumberName(number)) And (index < ((bosshp * 50) / bax[List.IndexOf(bosslevels, Backdrop.GetNumberName(number))])))
+        {
+            Looks.Show();
+            Looks.SetEffectTo(COLOR, ((bosshp * 66) / bax[List.IndexOf(bosslevels, Backdrop.GetNumberName(number))]));
+        }
+        Else
+        {
+            Looks.Hide();
+        }
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

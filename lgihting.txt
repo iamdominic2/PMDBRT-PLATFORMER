@@ -1,0 +1,50 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(diezap)
+{
+    Stop(other scripts in sprite);
+    Looks.Hide();
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(zap)
+{
+    Control.DeleteThisClone();
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Motion.GoToXY(Sensing.Of(x position, mudkip), 0);
+    Motion.ChangeXBy(Operator.Random(-11 , 11));
+    Control.Wait(2);
+    Sound.Play(Thunder Storm);
+    Looks.Show();
+    Control.Wait(0.9);
+    Repeat (11)
+    {
+        Looks.ChangeEffectBy(GHOST, 9);
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav
+Thunder Storm.wav

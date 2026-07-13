@@ -1,0 +1,359 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+boss = 0
+bosshp = -3
+catmode = 1
+cooldown = -61
+Deaths = 11
+dir = -87.46673331362
+ed = 0
+jumo = 6
+mix = -167.0304
+move = -2
+op = 5
+song = 2
+Spliced Time = 28.516
+temp = 13
+Time = 45.143
+time_now = 3.851
+time_prev = 45.143
+xv = 0
+xvv = -123.64171434233
+yv = 0
+
+
+//----- Lists ---------------------------------------------------------------------------------------------------------
+
+bax = { 
+    139
+    166
+    255
+    109
+    216
+    160
+    260
+}
+bosslevels = { 
+    12
+    18
+    30
+    40
+    47
+    56
+    67
+}
+bossmax = { }
+spliced = { 
+    3.564
+    2.013
+    2.54
+    14.923
+    1.625
+}
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.SwitchBackdropTo(1);
+    song = 1;
+    boss = 0;
+    Sound.SetVolumeTo(69);
+    Forever
+    {
+        Sound.PlayUntilDone(song);
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(dieskarm,)
+{
+    song = 20;
+    Sound.StopAllSounds();
+}
+
+WhenBroadcastReceived(diezap)
+{
+    song = 20;
+    Sound.StopAllSounds();
+    Looks.SwitchBackdropTo(31);
+}
+
+WhenBroadcastReceived(ext)
+{
+    Looks.NextBackdrop();
+    If (Backdrop.GetNumberName(number) == 4)
+    {
+        Sound.StopAllSounds();
+        song = 2;
+    }
+    If (Backdrop.GetNumberName(number) == 8)
+    {
+        song = 3;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 12)
+    {
+        If (boss == 0)
+        {
+            ed = 1;
+            List.DeleteAll(bossmax);
+            song = 17;
+            Event.Broadcast("skar");
+            Sound.StopAllSounds();
+            Control.Wait(0);
+            ed = 0;
+        }
+    }
+    If (Backdrop.GetNumberName(number) == 13)
+    {
+        ed = 1;
+        List.DeleteAll(bossmax);
+        song = 20;
+        Event.Broadcast("skar");
+        Sound.StopAllSounds();
+        Control.Wait(0);
+        ed = 0;
+    }
+    If (Backdrop.GetNumberName(number) == 14)
+    {
+        song = 4;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 18)
+    {
+        If (boss == 0)
+        {
+            ed = 1;
+            List.DeleteAll(bossmax);
+            song = 17;
+            Event.Broadcast("gar");
+            Sound.StopAllSounds();
+            Control.Wait(0);
+            ed = 0;
+        }
+    }
+    If (Backdrop.GetNumberName(number) == 20)
+    {
+        song = 5;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 25)
+    {
+        song = 6;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 29)
+    {
+        song = 7;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 30)
+    {
+        Sound.StopAllSounds();
+        ed = 1;
+        List.DeleteAll(bossmax);
+        song = 17;
+        Event.Broadcast("zap");
+        Sound.StopAllSounds();
+        Control.Wait(0);
+        ed = 0;
+    }
+    If (Backdrop.GetNumberName(number) == 31)
+    {
+        song = 20;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 32)
+    {
+        song = 8;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 36)
+    {
+        song = 9;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 39)
+    {
+        song = 10;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 40)
+    {
+        Sound.StopAllSounds();
+        ed = 1;
+        List.DeleteAll(bossmax);
+        song = 17;
+        Event.Broadcast("molt");
+        Sound.StopAllSounds();
+        Control.Wait(0);
+        ed = 0;
+    }
+    If (Backdrop.GetNumberName(number) == 41)
+    {
+        song = 20;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 42)
+    {
+        song = 11;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 47)
+    {
+        song = 17;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 46)
+    {
+        song = 12;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 48)
+    {
+        song = 20;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 49)
+    {
+        song = 13;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 54)
+    {
+        song = 14;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 56)
+    {
+        song = 17;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 58)
+    {
+        song = 15;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 64)
+    {
+        song = 16;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 67)
+    {
+        song = 18;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 68)
+    {
+        song = 20;
+        Sound.StopAllSounds();
+    }
+    If (Backdrop.GetNumberName(number) == 69)
+    {
+        song = 19;
+        Sound.StopAllSounds();
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+1.png
+2.png
+3.png
+4.png
+5.png
+6.png
+7.png
+8.png
+9.png
+10.png
+11.png
+12.png
+13.png
+14.png
+15.png
+16.png
+17.png
+18.png
+19.png
+20.png
+21.png
+22.png
+23.png
+24.png
+25.png
+26.png
+27.png
+28.png
+29.png
+30.png
+31.png
+32.png
+33.png
+34.png
+35.png
+36.png
+37.png
+38.png
+39.png
+40.png
+41.png
+42.png
+43.png
+44.png
+45.png
+46.png
+47.png
+48.png
+49.png
+50.png
+51.png
+52.png
+53.png
+54.png
+55.png
+56.png
+57.png
+58.png
+59.png
+60.png
+61.png
+62.png
+63.png
+64.png
+65.png
+66.png
+67.png
+68.png
+69.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Engine.wav
+FrostyForest.mp3
+ Frosty Grotto.mp3
+Happiness.mp3
+Lapis Cave.wav
+Magma Cavern.mp3
+MagmaCavernPIt.mp3
+MtBlaze.mp3
+MtBlazePeak.mp3
+MtSteel.mp3
+MtThunder.mp3
+MtThunderPeak.mp3
+no.wav
+Silent Chasm.mp3
+SinisterWoods.mp3
+Sky Tower.mp3
+Sky Tower Summit (1).mp3
+Thunderwave Cave.mp3
+Tiny Woods.mp3
+Versus Boss.mp3
+Versus Legendary.mp3

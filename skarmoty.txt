@@ -1,0 +1,132 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(dieskarm,)
+{
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.Hide();
+    Looks.SwitchBackdropTo(13);
+    Stop(other scripts in sprite);
+}
+
+WhenBroadcastReceived(skar)
+{
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    bosshp = 139;
+    Motion.GoToXY(-5, 40);
+    Motion.PointInDirection(90);
+    Forever
+    {
+        Motion.PointInDirection(90);
+        Looks.SwitchCostumeTo(costume1);
+        Looks.Show();
+        Looks.SetSizeTo(350);
+        Control.Wait(0);
+        Looks.NextCostume();
+        Repeat (20)
+        {
+            Motion.ChangeXBy(-5);
+        }
+        Repeat (16)
+        {
+            Motion.ChangeYBy(-5);
+        }
+        Repeat (20)
+        {
+            Motion.ChangeXBy(-5);
+        }
+        Sound.Play(Peck);
+        Repeat (ceiling(((144 - bosshp) / 28)))
+        {
+            Control.CreateCloneOf(_myself_);
+            Motion.ChangeYBy(2);
+        }
+        Motion.PointInDirection(-90);
+        Repeat (11)
+        {
+            Motion.ChangeXBy(1);
+            Motion.ChangeXBy(-1);
+        }
+        Repeat (7)
+        {
+            Motion.ChangeXBy(9);
+        }
+        Repeat (5)
+        {
+            Motion.ChangeYBy(-10);
+        }
+        Repeat (10)
+        {
+            Motion.ChangeXBy(10);
+        }
+        Control.CreateCloneOf(_myself_);
+        Repeat (11)
+        {
+            Motion.ChangeXBy(10);
+        }
+        Repeat (6)
+        {
+            Motion.ChangeYBy(10);
+        }
+        Repeat (6)
+        {
+            Motion.ChangeYBy(10);
+        }
+        Repeat (10)
+        {
+            Motion.ChangeXBy(-10);
+        }
+        Motion.GoToXY(-5, 40);
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Sound.Play(Peck);
+    Motion.SetRotationStyle(all around);
+    Looks.SwitchCostumeTo(peck);
+    Looks.SetSizeTo(175);
+    Motion.PointTowards(mudkip);
+    Motion.TurnRight(Operator.Random((bosshp - 55) , (55 - bosshp)));
+    Repeat Until Sensing.TouchingColour(#868686)
+    {
+        Motion.Move(8);
+        If Sensing.TouchingColour(#8098f8)
+        {
+            Sound.StopAllSounds();
+            Deaths += 1;
+            Event.Broadcast("skar");
+            Stop(other scripts in sprite);
+            Control.DeleteThisClone();
+        }
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+costume2.png
+peck.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Peck.wav

@@ -1,0 +1,56 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(ext)
+{
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    If (Backdrop.GetNumberName(number) == 39)
+    {
+        Forever
+        {
+            Motion.GoToXY(0, 30);
+            Motion.PointInDirection(90);
+            Control.CreateCloneOf(_myself_);
+            Motion.PointInDirection(-90);
+            Control.CreateCloneOf(_myself_);
+            Motion.PointInDirection(0);
+            Control.CreateCloneOf(_myself_);
+            Motion.PointInDirection(180);
+            Control.CreateCloneOf(_myself_);
+            Control.Wait(1);
+        }
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.Show();
+    Repeat Until Sensing.TouchingObject(_edge_)
+    {
+        Motion.Move(9);
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

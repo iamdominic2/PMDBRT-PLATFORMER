@@ -1,0 +1,57 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(art)
+{
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(cela)
+{
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(diealt)
+{
+    Control.DeleteThisClone();
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.Show();
+    Looks.SetSizeTo(100);
+    If (Costume.GetNumberName(number) == 1)
+    {
+        Motion.GoTo(art);
+        Looks.SetSizeTo(100);
+        Looks.SwitchCostumeTo(main);
+        Motion.PointTowards(mudkip);
+        Repeat Until (Sensing.TouchingColour(#4dffe1) Or Sensing.TouchingObject(_edge_))
+        {
+            Motion.Move(6);
+            Control.CreateCloneOf(_myself_);
+        }
+        Control.DeleteThisClone();
+    }
+    Else
+    {
+        Control.Wait(1);
+        Control.DeleteThisClone();
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+main.png

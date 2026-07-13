@@ -1,0 +1,104 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+    Looks.SetSizeTo(400);
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(diegar)
+{
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.SwitchBackdropTo(19);
+    Sound.StopAllSounds();
+    song = 21;
+    Looks.Hide();
+    Stop(other scripts in sprite);
+}
+
+WhenBroadcastReceived(gar)
+{
+    bosshp = 166;
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.Show();
+    Motion.GoToXY(78, -111);
+    Looks.SwitchCostumeTo(1);
+    Forever
+    {
+        Repeat (66)
+        {
+            Motion.SetX(((Sensing.Of(x position, mudkip) + (Motion.XPosition() * 44)) / 45));
+            Call up;
+        }
+        Sound.Play(Ball);
+        Control.CreateCloneOf(_myself_);
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.SetSizeTo(222);
+    Looks.SwitchCostumeTo(2);
+    Motion.PointTowards(mudkip);
+    Repeat Until Sensing.TouchingObject(_edge_)
+    {
+        Motion.Move(8);
+        Looks.ChengeSizeBy(6);
+        If Sensing.TouchingColour(#8098f8)
+        {
+            Sound.StopAllSounds();
+            Deaths += 1;
+            Event.Broadcast("gar");
+            Stop(other scripts in sprite);
+            Control.DeleteThisClone();
+        }
+    }
+    If Sensing.TouchingColour(#8098f8)
+    {
+        Sound.StopAllSounds();
+        Deaths += 1;
+        Event.Broadcast("gar");
+        Stop(other scripts in sprite);
+        Control.DeleteThisClone();
+    }
+    Control.Wait(0);
+    Control.DeleteThisClone();
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define up (warp=true)
+{
+    Looks.SetSizeTo(666);
+    Motion.SetY(-233);
+    Repeat Until ((Not (Sensing.TouchingColour(#467b31))) And (Motion.YPosition() > -111))
+    {
+        Motion.ChangeYBy(1);
+    }
+    Looks.SetSizeTo(444);
+    Motion.ChangeYBy(-12);
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+1.png
+2.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Ball.wav

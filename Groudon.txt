@@ -1,0 +1,97 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.SetSizeTo(400);
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(diegrou)
+{
+    Stop(other scripts in sprite);
+    Looks.SwitchBackdropTo(56);
+    Looks.Hide();
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(grou)
+{
+    bosshp = 160;
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.SwitchCostumeTo(Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Groudon);
+    Looks.Show();
+    Motion.GoToXY(-80, 15);
+    Forever
+    {
+        Repeat (33)
+        {
+            Motion.ChangeYBy(0.1);
+        }
+        Repeat (3)
+        {
+            Control.CreateCloneOf(_myself_);
+            Control.Wait(0.2);
+        }
+        Repeat (33)
+        {
+            Motion.ChangeYBy(-0.1);
+        }
+        Repeat (11)
+        {
+            Motion.ChangeXBy(14);
+        }
+        Repeat (33)
+        {
+            Motion.ChangeYBy(0.1);
+        }
+        Repeat (4)
+        {
+            Control.CreateCloneOf(_myself_);
+            Control.Wait(0.2);
+        }
+        Repeat (33)
+        {
+            Motion.ChangeYBy(-0.1);
+        }
+        Repeat (11)
+        {
+            Motion.ChangeXBy(-14);
+        }
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.SetSizeTo(100);
+    Looks.SwitchCostumeTo(Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Groudon2);
+    Repeat Until Sensing.TouchingObject(_edge_)
+    {
+        Motion.ChangeYBy(11);
+    }
+    Looks.Hide();
+    Motion.SetX(Operator.Random(-235 , 200));
+    Motion.ChangeYBy(-12);
+    Control.Wait(1);
+    Looks.Show();
+    Repeat Until Sensing.TouchingObject(_edge_)
+    {
+        Motion.ChangeYBy((-8 + ((bosshp - 53) / 66)));
+        Looks.ChengeSizeBy(4);
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Groudon.png
+Game Boy Advance - Pokemon Mystery Dungeon Red Rescue Team - Groudon2.png

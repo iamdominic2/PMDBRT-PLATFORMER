@@ -1,0 +1,57 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.SetSizeTo(400);
+    Motion.GoToXY(5, 30);
+    Looks.Hide();
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(art)
+{
+    Looks.SwitchCostumeTo(costume1);
+    bosshp = 216;
+    Looks.Show();
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Event.Broadcast("cela");
+    Motion.GoToXY(5, 30);
+    Forever
+    {
+        Motion.GlideTo(0, 60, 1.7);
+        Control.CreateCloneOf(clone);
+        Motion.GlideTo(151, 75, 1.7);
+        Control.CreateCloneOf(clone);
+        Motion.GlideTo(158, 21, 1.7);
+        Control.CreateCloneOf(clone);
+        Motion.GlideTo(5, 30, 1.7);
+        Control.CreateCloneOf(clone);
+    }
+}
+
+WhenBroadcastReceived(diealt)
+{
+    Event.BroadcastAndWait("ext");
+    Stop(other scripts in sprite);
+    Looks.Hide();
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+If (Backdrop.GetNumberName(number) == 1)
+{
+}
+
+bosshp = 3;
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+main.png

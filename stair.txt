@@ -1,0 +1,42 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.GoToXY(210, -155);
+    Looks.SetSizeTo(400);
+    Call du7mp;
+    Control.Wait(0.01);
+    Call du7mp;
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(ext)
+{
+    Control.Wait(0.01);
+    Motion.GoToXY(210, -240);
+    Call du7mp;
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define du7mp (warp=true)
+{
+    Motion.SetY(-155);
+    Repeat Until ((Not ((((((((((Sensing.TouchingColour(#bd8719) Or Sensing.TouchingColour(#d6d6d6)) Or Sensing.TouchingColour(#810000)) Or (Sensing.TouchingColour(#6cff66) Or Sensing.TouchingColour(#4dffe1))) Or Sensing.TouchingColour(#5476ff)) Or Sensing.TouchingColour(#f3ff00)) Or Sensing.TouchingColour(#868686)) Or Sensing.TouchingColour(#467b31)) Or Sensing.TouchingColour(#ffbc21)) Or Sensing.TouchingColour(#8b8a17)))) Or Sensing.TouchingObject(_edge_))
+    {
+        Motion.ChangeYBy(1);
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

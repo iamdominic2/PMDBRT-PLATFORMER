@@ -1,0 +1,56 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+}
+
+
+//----- Key pressed events --------------------------------------------------------------------------------------------
+
+WhenKeyPressed(space)
+{
+    bosshp = 0;
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(diezap)
+{
+    Stop(other scripts in sprite);
+    Looks.Hide();
+}
+
+WhenBroadcastReceived(zap)
+{
+    bosshp = 255;
+    Looks.SetSizeTo(400);
+    Looks.Show();
+    Motion.GoToXY(-150, 90);
+    Forever
+    {
+        Repeat (Operator.Random(39 , 44))
+        {
+            Motion.ChangeXBy(Operator.Random(-22 , 22));
+            If Sensing.TouchingColour(#8b8a17)
+            {
+                Motion.SetX(20);
+            }
+            If Sensing.TouchingObject(_edge_)
+            {
+                Motion.SetX(-195);
+            }
+            Motion.SetY(Operator.Random(80 , 111));
+            Looks.NextCostume();
+            Control.Wait(0);
+        }
+        Control.CreateCloneOf(lgihting);
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+1.png
+2.png

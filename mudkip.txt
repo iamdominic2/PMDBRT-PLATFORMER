@@ -1,0 +1,458 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+touchcheck = 
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    jumo = 1;
+    xv = 0;
+    Deaths = 0;
+    Time = -.01;
+    yv = -2;
+    List.DeleteAll(spliced);
+    Sensing.ResetTimer();
+    Looks.SwitchCostumeTo(hitbox);
+    Looks.SetSizeTo(400);
+    time_now = 0;
+    time_prev = 0;
+    Motion.GoToXY(-220, -112);
+    Control.Wait(0);
+    Call up(1);
+    mix = (Motion.XPosition() + Motion.YPosition());
+    Forever
+    {
+        time_now += (Sensing.Timer() - time_prev);
+        If (Not ((mix == (Motion.XPosition() + Motion.YPosition()))))
+        {
+            Repeat ((1 - catmode))
+            {
+                Stop(all);
+            }
+        }
+        Call widdleout;
+        If Sensing.TouchingColour(#317a43)
+        {
+            Motion.GoToXY(-200, -138);
+        }
+        If Sensing.TouchingColour(#2a21ff)
+        {
+            Sound.Play(Boing);
+            yv = 24;
+        }
+        cooldown += -1;
+        If (Sensing.MouseDown() And (cooldown < Operator.Random(1 , 2)))
+        {
+            cooldown = 1;
+            Repeat (2)
+            {
+                Control.CreateCloneOf(_myself_);
+                Call loop("");
+            }
+        }
+        Looks.SetSizeTo(555);
+        If Sensing.TouchingObject(stair)
+        {
+            Motion.GoToXY(-220, -112);
+            List.Add(spliced, time_now);
+            Event.Broadcast("ext");
+            Control.Wait(0);
+            Sound.Play(next);
+            Call die(0);
+            Call up(1);
+            time_now = 0;
+        }
+        Call loop("");
+        mix = (Motion.XPosition() + Motion.YPosition());
+        time_prev = Sensing.Timer();
+        Call imer splice;
+    }
+}
+
+WhenGreenFlagClicked()
+{
+    catmode = 1;
+}
+
+WhenGreenFlagClicked()
+{
+    Forever
+    {
+        Time = Sensing.Timer();
+    }
+}
+
+WhenGreenFlagClicked()
+{
+    Sensing.SetDragMode(not draggable);
+}
+
+
+//----- Key pressed events --------------------------------------------------------------------------------------------
+
+WhenKeyPressed(r)
+{
+    Call die(1);
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(ext)
+{
+    Call die("");
+    mix = (Motion.XPosition() + Motion.YPosition());
+}
+
+WhenBroadcastReceived(gar)
+{
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Motion.GoToXY(-220, -112);
+    Control.Wait(0);
+    Sound.Play(die);
+    Call up(1);
+}
+
+WhenBroadcastReceived(skar)
+{
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Motion.GoToXY(-220, -112);
+    Control.Wait(0);
+    Sound.Play(die);
+    Call up(1);
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Sensing.SetDragMode(not draggable);
+    Motion.PointTowards(_mouse_);
+    If (Not (List.ContainsItem(bosslevels, Backdrop.GetNumberName(number))))
+    {
+        Control.DeleteThisClone();
+    }
+    Motion.TurnRight(Operator.Random(-8 , 8));
+    Sound.Play(WaterGun);
+    Looks.SwitchCostumeTo(gun);
+    Motion.SetRotationStyle(all around);
+    touchcheck = 0;
+    Repeat Until ((touchcheck == "true") Or Sensing.TouchingObject(_edge_))
+    {
+        Call checktouch;
+        Motion.Move(9);
+        If Sensing.TouchingColour(#980000)
+        {
+            bosshp += -1;
+            Sound.Play(hurt);
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            If (bosshp < 0)
+            {
+                Event.Broadcast("diegrou");
+            }
+            Control.DeleteThisClone();
+        }
+        If (Sensing.TouchingColour(#d0d8d8) And (Not (Sensing.TouchingObject(art))))
+        {
+            bosshp += -1;
+            Sound.Play(hurt);
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            If (bosshp < 0)
+            {
+                Event.Broadcast("dieskarm,");
+            }
+            Control.DeleteThisClone();
+        }
+        If Sensing.TouchingColour(#8860b8)
+        {
+            bosshp += -1;
+            Sound.Play(hurt);
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            If (bosshp < 1)
+            {
+                Event.Broadcast("diegar");
+            }
+            Control.DeleteThisClone();
+        }
+        If Sensing.TouchingObject(zapdos)
+        {
+            bosshp += -1;
+            Sound.Play(hurt);
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            If (bosshp < 1)
+            {
+                Event.Broadcast("diezap");
+            }
+            Control.DeleteThisClone();
+        }
+        If Sensing.TouchingObject(lgihting)
+        {
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            Control.DeleteThisClone();
+        }
+        If Sensing.TouchingObject(molt)
+        {
+            bosshp += -1;
+            Sound.Play(hurt);
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            If (bosshp < 1)
+            {
+                Event.Broadcast("diemolt");
+            }
+            Control.DeleteThisClone();
+        }
+        If Sensing.TouchingObject(art)
+        {
+            bosshp += -1;
+            Sound.Play(hurt);
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            If (bosshp < 1)
+            {
+                Event.Broadcast("diealt");
+            }
+            Control.DeleteThisClone();
+        }
+        If Sensing.TouchingColour(#58b020)
+        {
+            bosshp += -1;
+            Sound.Play(hurt);
+            Looks.SetEffectTo(GHOST, 66);
+            Control.Wait(0.1);
+            If (bosshp < 1)
+            {
+                Event.Broadcast("dieray");
+            }
+            Control.DeleteThisClone();
+        }
+    }
+    Looks.SetEffectTo(GHOST, 66);
+    Control.Wait(0.1);
+    Control.DeleteThisClone();
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define checktouch (warp=false)
+{
+    touchcheck = (((((((((Sensing.TouchingColour(#d6d6d6) Or Sensing.TouchingColour(#4dffe1)) Or Sensing.TouchingColour(#bd8719)) Or Sensing.TouchingColour(#6cff66)) Or Sensing.TouchingColour(#810000)) Or Sensing.TouchingColour(#5476ff)) Or Sensing.TouchingColour(#f3ff00)) Or Sensing.TouchingColour(#868686)) Or Sensing.TouchingColour(#467b31)) Or (Sensing.TouchingColour(#ffbc21) Or Sensing.TouchingColour(#8b8a17)));
+}
+
+Define die(string number or text) (warp=false)
+{
+    Deaths += number or text;
+    xv = 0;
+    yv = -2;
+    If List.ContainsItem(bosslevels, Backdrop.GetNumberName(number))
+    {
+        Sound.StopAllSounds();
+    }
+    time_now = 0;
+    If (number or text == 1)
+    {
+        Sound.Play(die);
+    }
+    If (Backdrop.GetNumberName(number) == 12)
+    {
+        Event.Broadcast("skar");
+    }
+    If (Backdrop.GetNumberName(number) == 18)
+    {
+        Event.Broadcast("gar");
+    }
+    If (Backdrop.GetNumberName(number) == 30)
+    {
+        Event.Broadcast("zap");
+    }
+    If (Backdrop.GetNumberName(number) == 40)
+    {
+        Event.Broadcast("molt");
+    }
+    If (Backdrop.GetNumberName(number) == 47)
+    {
+        Event.Broadcast("art");
+    }
+    If (Backdrop.GetNumberName(number) == 56)
+    {
+        Event.Broadcast("grou");
+    }
+    If (Backdrop.GetNumberName(number) == 67)
+    {
+        Event.Broadcast("ray");
+    }
+    Repeat ((number or text * 5))
+    {
+        Looks.ChangeEffectBy(GHOST, 22);
+        Looks.ChangeEffectBy(BRIGHTNESS, 22);
+    }
+    Motion.GoToXY(-217, -112);
+    Looks.ClearGraphicEffects();
+    Looks.SetSizeTo(400);
+}
+
+Define imer splice (warp=true)
+{
+    op = 0;
+    Spliced Time = 0;
+    Repeat (List.Length(spliced))
+    {
+        op += 1;
+        Spliced Time += spliced[op];
+    }
+    Spliced Time += time_now;
+}
+
+Define loop(string the) (warp=true)
+{
+    Costume.GoToFrontBack(front);
+    Looks.SwitchCostumeTo(hitbox);
+    Looks.SetSizeTo(400);
+    Motion.ChangeXBy((xv * 1.5));
+    Motion.PointInDirection(90);
+    Call checktouch;
+    If (touchcheck == "true")
+    {
+        Motion.ChangeXBy((-1.5 * xv));
+    }
+    If Sensing.TouchingObject(move_platform_b3)
+    {
+        Motion.ChangeYBy(11);
+        If (yv < 7)
+        {
+            yv = 7;
+        }
+    }
+    If Sensing.TouchingObject(move_platform_7)
+    {
+        Repeat Until (Not (Sensing.TouchingObject(move_platform_7)))
+        {
+            Motion.ChangeYBy(1);
+        }
+        Motion.ChangeYBy(3);
+    }
+    Motion.PointInDirection(90);
+    xv += (((((Sensing.KeyPressed(d) Or Sensing.KeyPressed(right arrow)) Or ) - ((Sensing.KeyPressed(a) Or Sensing.KeyPressed(left arrow)) Or )) - (xv / 5)) + (Sensing.TouchingColour(#9d54ff) * 1.2));
+    yv += -1.666;
+    Motion.ChangeYBy(yv);
+    Call checktouch;
+    jumo += -1.98;
+    If (touchcheck == "true")
+    {
+        Call move out(Motion.XPosition())(Motion.YPosition());
+        Motion.ChangeYBy((-0.1 * yv));
+        If (yv > 0)
+        {
+            jumo = -3;
+        }
+        yv = 0;
+    }
+    If (Sensing.KeyPressed(w) Or Sensing.KeyPressed(up arrow))
+    {
+        Motion.ChangeYBy(-7);
+        Call checktouch;
+        If ((touchcheck == "true") Or (jumo > -1))
+        {
+            Sound.Play(Jump);
+            jumo = (yv - 33);
+            yv = 18;
+        }
+        Motion.ChangeYBy(7);
+    }
+    Motion.PointInDirection(xv);
+    If (((Sensing.TouchingColour(#ff8400) Or Sensing.TouchingObject(clone)) Or (Motion.YPosition() < -172)) Or Sensing.TouchingObject(lgihting))
+    {
+        Looks.SwitchCostumeTo(1);
+        If (yv > 3)
+        {
+            Looks.SwitchCostumeTo(2);
+        }
+        If (yv < -4)
+        {
+            Looks.SwitchCostumeTo(3);
+        }
+        Call die(1);
+        If (Backdrop.GetNumberName(number) == 12)
+        {
+            Deaths += -1;
+        }
+    }
+    Looks.SwitchCostumeTo(1);
+    If (yv > 3)
+    {
+        Looks.SwitchCostumeTo(2);
+    }
+    If (yv < -4)
+    {
+        Looks.SwitchCostumeTo(3);
+    }
+}
+
+Define move out(string )(string 1) (warp=true)
+{
+    touchcheck = 2;
+    jumo = 6;
+    Repeat Until (touchcheck == "false")
+    {
+        Call checktouch;
+        Motion.ChangeYBy((-0.1 * yv));
+    }
+}
+
+Define up(string number) (warp=true)
+{
+    Call widdleout;
+    touchcheck = 2;
+    Repeat Until (touchcheck == "false")
+    {
+        Call checktouch;
+        Motion.ChangeYBy(number);
+    }
+}
+
+Define widdleout (warp=true)
+{
+    touchcheck = "stairs";
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+( - );
+
+( - time_now);
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+1.png
+2.png
+3.png
+gun.png
+hitbox.png
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Boing.wav
+die.wav
+hurt.wav
+Jump.wav
+next.wav
+WaterGun.wav
